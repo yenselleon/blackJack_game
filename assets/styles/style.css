@@ -14,3 +14,7 @@ body{
     margin-left: -50px;
     width: 150px;
 }
+
+.contenedor__cartas{
+    height: 280px;
+}

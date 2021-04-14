@@ -15,29 +15,22 @@
 
     <div class="row justify-content-center container-fluid">
         <div class="container justify-content-center d-flex">
-            <button class="btn btn-danger">Nuevo Juego</button>
-            <button class="btn btn-primary mx-3">Pedir Carta</button>
-            <button class="btn btn-primary">Detener</button>
+            <button id="btnNuevoJuego" class="btn btn-danger">Nuevo Juego</button>
+            <button id="btnPedir" class="btn btn-primary mx-3">Pedir Carta</button>
+            <button id="btnDetener" class="btn btn-primary">Detener</button>
         </div>
     </div>
 
-    <div class="container-fluid mb-4">
+    <div class="container-fluid mb-4 contenedor__cartas">
         <h1 class="text-white">Jugador 1 - <small>0</small></h1>
-        <div class="row container">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
+        <div id="jugador_cartas" class="row container">
 
         </div>
     </div>
 
-    <div class="container-fluid ">
+    <div class="container-fluid contenedor__cartas">
         <h1 class="text-white">Computadora - <small>0</small></h1>
-        <div class="row container">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
-            <img class="card" src="./assets/cartas/10C.png" alt="">
+        <div id="computadora_cartas" class="row container">
             <img class="card" src="./assets/cartas/10C.png" alt="">
 
         </div>

@@ -1,9 +1,19 @@
 
+const btnNuevoJuego = document.getElementById('btnNuevoJuego');
+const btnPedir = document.getElementById('btnPedir');
+const btnDetener = document.getElementById('btnDetener');
+const jugador_cartas = document.getElementById('jugador_cartas');
+
+let small = document.querySelectorAll('small');
+
+const img = document.createElement("img")
 
 let deck = [];
 
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'K', 'Q', 'J'];
+let puntosJugador = 0;
+let puntosComputadora = 0;
 
 const crearDeck = () => {
 
@@ -33,8 +43,7 @@ const pedirCarta = () => {
     }
 
     const carta = deck.pop()
-    console.log(deck);
-    console.log(carta);
+
     return carta;
 
 }
@@ -53,6 +62,33 @@ const valor = valorCarta(pedirCarta());
 console.log({valor});
 
 
+//Eventos
 
+btnPedir.addEventListener('click', () => {
+
+    const carta = pedirCarta()
+    
+    puntosJugador = puntosJugador + valorCarta(carta);
+    
+    small[0].innerText = `${puntosJugador}`;
+    
+    const imgCarta = document.createElement('img')
+    imgCarta.classList.add('card')
+    imgCarta.src = `./assets/cartas/${carta}.png`
+
+    jugador_cartas.append(imgCarta);
+
+
+    if( puntosJugador > 21 ){
+        console.warn('Lo siento Perdiste');
+        btnPedir.disabled = true
+
+    }else if( puntosJugador === 21 ){
+        console.warn('Haz ganado la partida');
+        btnPedir.disabled = true
+
+    }
+
+})
 
 
