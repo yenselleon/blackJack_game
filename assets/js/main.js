@@ -4,8 +4,6 @@ const miModulo = (() => {
     const btnNuevoJuego = document.getElementById('btnNuevoJuego'),
           btnPedir = document.getElementById('btnPedir'),
           btnDetener = document.getElementById('btnDetener'),
-          jugador_cartas = document.getElementById('jugador_cartas'),
-          computadora_cartas = document.getElementById('computadora_cartas'),
           img = document.createElement("img");
 
     
@@ -20,12 +18,13 @@ const miModulo = (() => {
     const inicializarJuego = ( jugadores = 2) => {
     
         //inicializar btn
-        btnDetener.disabled = false
         btnPedir.disabled = false
 
         //inicializar y limpiar mesa
         let deck = crearDeck();
         puntosJugadores= [];
+        cartas_container.forEach(e => e.innerHTML = "")
+        small.forEach(e => e.innerText = "")
         
         //determinar numero de jugadores
         for(let i = 0; i < jugadores; i++){
@@ -110,24 +109,22 @@ const miModulo = (() => {
     /*------------------------------------------*/
 
     const turnoComputadora = (valorMinimo) => {
-        btnDetener.disabled = true
-        btnPedir.disabled = true
-
+        
+        btnDetener.disabled = true;
+        
 
         do {
             const carta = pedirCarta()
 
-            puntosComputadora = puntosComputadora + valorCarta(carta);
-
-            small[1].innerText = `${puntosComputadora}`;
+            acumularPuntos(carta, puntosJugadores.length - 1)
 
             crearCarta(carta, puntosJugadores.length - 1)
 
-            if (valorMinimo > 21 || puntosComputadora === 21) {
+            if (valorMinimo > 21 || puntosJugadores[puntosJugadores.length - 1] === 21) {
                 break;
             }
 
-        } while (puntosComputadora <= valorMinimo);
+        } while (puntosJugadores[puntosJugadores.length - 1] <= valorMinimo);
 
     }
 
@@ -142,26 +139,24 @@ const miModulo = (() => {
     /*------------------------------------------*/
 
     btnPedir.addEventListener('click', () => {
-
+        btnDetener.disabled = false
         const carta = pedirCarta()
 
-        puntosJugador = puntosJugador + valorCarta(carta);
-
-        small[0].innerText = `${puntosJugador}`;
+        acumularPuntos(carta, 0)
 
         crearCarta(carta, 0)
 
 
-        if (puntosJugador > 21) {
+        if (puntosJugadores[0] > 21) {
             console.warn('Lo siento Perdiste');
-            btnPedir.disabled = true
-            btnDetener.disabled = true
-            turnoComputadora(puntosJugador)
+            btnPedir.disabled = true;
+            btnDetener.disabled = true;
+            turnoComputadora(puntosJugadores[0])
 
 
-        } else if (puntosJugador === 21) {
+        } else if (puntosJugadores[0] === 21) {
             console.warn('Haz ganado la partida');
-            turnoComputadora(puntosJugador)
+            turnoComputadora(puntosJugadores[0])
             btnPedir.disabled = true
             btnDetener.disabled = true
 
@@ -172,8 +167,9 @@ const miModulo = (() => {
 
     btnDetener.addEventListener('click', () => {
 
-        turnoComputadora(puntosJugador)
-
+        turnoComputadora(puntosJugadores[0])
+        btnPedir.disabled = true
+        btnDetener.disabled = true
     })
 
     
