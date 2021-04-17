@@ -16,21 +16,21 @@
     <div class="row justify-content-center container-fluid">
         <div class="container justify-content-center d-flex">
             <button id="btnNuevoJuego" class="btn btn-danger">Nuevo Juego</button>
-            <button id="btnPedir" class="btn btn-primary mx-3">Pedir Carta</button>
-            <button id="btnDetener" class="btn btn-primary">Detener</button>
+            <button id="btnPedir" class="btn btn-primary mx-3" disabled="true">Pedir Carta</button>
+            <button id="btnDetener" class="btn btn-primary" disabled="true">Detener</button>
         </div>
     </div>
 
     <div class="container-fluid mb-4 contenedor__cartas">
         <h1 class="text-white">Jugador 1 - <small>0</small></h1>
-        <div id="jugador_cartas" class="row container">
+        <div id="jugador_cartas" class="row container cartas_container">
 
         </div>
     </div>
 
     <div class="container-fluid contenedor__cartas">
         <h1 class="text-white">Computadora - <small>0</small></h1>
-        <div id="computadora_cartas" class="row container">
+        <div id="computadora_cartas" class="row container cartas_container">
 
         </div>
     </div>
@@ -38,5 +38,11 @@
 
     <script src="./assets/js/underScore-min.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script>
+        
+        document.querySelector('#btnNuevoJuego').addEventListener('click', () => {
+            miModulo.inicializarJuego()
+        });
+    </script>
 </body>
 </html>
