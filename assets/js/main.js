@@ -3,8 +3,10 @@ const miModulo = (() => {
 
     const btnNuevoJuego = document.getElementById('btnNuevoJuego'),
           btnPedir = document.getElementById('btnPedir'),
+          modalBodyText = document.getElementById('modal_body-text'),
           btnDetener = document.getElementById('btnDetener'),
-          img = document.createElement("img");
+          modal = $('#modal_info'); //.modal('show') || .modal('hide'),
+
 
     
     const tipos = ['C', 'D', 'H', 'S'],
@@ -16,6 +18,7 @@ const miModulo = (() => {
         small = document.querySelectorAll('small');
 
     const inicializarJuego = ( jugadores = 2) => {
+        
     
         //inicializar btn
         btnPedir.disabled = false
@@ -32,6 +35,16 @@ const miModulo = (() => {
         }
 
     
+    }
+
+    /*------------------------------------------*/
+    /*--Mostrar mensajes en el modal--*/
+    /*------------------------------------------*/
+    const modalMessage = (message) => {
+
+        modal.modal('show')
+        
+        modalBodyText.innerText = message;
     }
 
     const crearDeck = () => {
@@ -126,6 +139,12 @@ const miModulo = (() => {
 
         } while (puntosJugadores[puntosJugadores.length - 1] <= valorMinimo);
 
+        if(puntosJugadores[puntosJugadores.length - 1] > puntosJugadores[0] && puntosJugadores[puntosJugadores.length - 1] <= 21){
+            modalMessage('Haz perdido la partida, la computadora ha ganado');
+        }else{
+            modalMessage('Haz ganado la partida');
+        }
+
     }
 
     /*------------------------------------------*/
@@ -148,14 +167,20 @@ const miModulo = (() => {
 
 
         if (puntosJugadores[0] > 21) {
-            console.warn('Lo siento Perdiste');
+            modalMessage('Haz perdido la partida, haz acumulado mas de 21 puntos');
             btnPedir.disabled = true;
             btnDetener.disabled = true;
             turnoComputadora(puntosJugadores[0])
 
 
+        } else if (puntosJugadores[0] === 21 && puntosJugadores[ puntosJugadores.length - 1] === 21) {
+            modalMessage('Ha habido un Empate');
+            turnoComputadora(puntosJugadores[0])
+            btnPedir.disabled = true
+            btnDetener.disabled = true
+
         } else if (puntosJugadores[0] === 21) {
-            console.warn('Haz ganado la partida');
+            modalMessage('Haz ganado la partida');
             turnoComputadora(puntosJugadores[0])
             btnPedir.disabled = true
             btnDetener.disabled = true
