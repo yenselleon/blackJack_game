@@ -50,8 +50,8 @@ const miModulo = (() => {
                 deck.push(especial + tipo)
             }
         }
-        console.log(deck)
-        return _.shuffle(deck)
+        
+        return deck = _.shuffle(deck);
     }
 
     
